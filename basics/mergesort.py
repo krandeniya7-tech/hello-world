@@ -1,3 +1,4 @@
+
 def mergesort(array):
     if len(array) <= 1:
         return array
@@ -9,13 +10,11 @@ def mergesort(array):
     left = mergesort(array[:m])
     right = mergesort(array[m:])
 
-    merged = merge(left, right)
-    return merged
+    return merge(left, right)
 
 
 def merge(left, right):
     merged = []
-
     while len(left) > 0 and len(right) > 0:
         if left[0] <= right[0]:
             merged.append(left.pop(0))
@@ -24,29 +23,30 @@ def merge(left, right):
 
     if len(left) > 0:
         merged += left
-    else:
+    if len(right) > 0:
         merged += right
 
+    print("Merging...")
+    print("left:", left)
+    print("right:", right)
+    print("merged:", merged)
     return merged
 
 
 if __name__ == "__main__":
     input_str = input("Enter numbers, separated by ',': ")
     input_list = input_str.split(",")
-    value_list = []
+    print("input_list:", input_list)
 
+    value_list = []
     for x in input_list:
         try:
             value_list.append(int(x))
         except ValueError:
             print("Invalid input.")
             quit(1)
-
-    array = value_list.copy()
-    print("input_list:", input_list)
     print("value_list:", value_list)
-    print("array:", array)
 
-    sorted_array = mergesort(array)
-    print(sorted_array)
+    sorted_list = mergesort(value_list)
+    print(sorted_list)
 
