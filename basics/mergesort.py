@@ -1,11 +1,8 @@
-
 def debug_print(debug_msg=None, **kwargs):
-
     if debug_msg:
         print(debug_msg)
-
     for key, value in kwargs.items():
-        print("{}: {}".format(key, value))
+        print(f"{key}: {value}")
 
 
 def mergesort(array):
@@ -17,6 +14,7 @@ def mergesort(array):
     left = mergesort(array[:m])
     right = mergesort(array[m:])
 
+    debug_print("Merging...", left=left, right=right)
     return merge(left, right)
 
 
@@ -34,6 +32,7 @@ def merge(left, right):
     else:
         merged += right
 
+    debug_print("merged", merged=merged)
     return merged
 
 
@@ -44,9 +43,12 @@ if __name__ == "__main__":
     for x in input_list:
         try:
             value_list.append(int(x))
-        except ValueError as err:
+        except ValueError:
             print("Invalid input.")
             quit(1)
 
-    sorted_list = mergesort(value_list)
-    print(sorted_list)
+    array = value_list.copy()
+    debug_print(input_list=input_list, value_list=value_list, array=array)
+    sorted_list = mergesort(array)
+    debug_print(array=sorted_list)
+
